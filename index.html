@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Housing Affordability Calculator</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="slidecontainer">
+			<h3>Salary (£<span id="gross"></span>pa)</h3>
+			<input type="range" min="0" max="175000" value="27000" step="500" class="slides" id="slider1">
+		</div>
+		<div class="slidecontainer">
+			<h3>Pension (<span id="pension"></span>%)</h3>
+			<input type="range" min="0" max="15" value="5" step="1" class="slides" id="slider6">
+		</div>
+		<div class="slidecontainer">
+			<h3>Student Loan (Plan <span id="student_loan"></span>)</h3>
+			<input type="range" min="0" max="2" value="0" step="1" class="slides" id="slider7">
+		</div>
+		<div class="slidecontainer">
+			<h3>Rent (£<span id="rent"></span>pcm)</h3>
+			<input type="range" min="0" max="3000" value="900" step="25" class="slides" id="slider2">
+		</div>
+		<div class="slidecontainer">
+			<h3>Rent sharers (<span id="sharers"></span>)</h3>
+			<input type="range" min="1" max="5" value="1" step="1" class="slides" id="slider3">
+		</div>
+		<div class="slidecontainer">
+			<h3>Debt (£<span id="debt"></span>)</h3>
+			<input type="range" min="0" max="50000" value="0" step="500" class="slides" id="slider4">
+		</div>
+		<div class="slidecontainer">
+			<h3>APR on debt (<span id="interest"></span>%)</h3>
+			<input type="range" min="0" max="40" value="0" step="1" class="slides" id="slider5">
+		</div>
+	</div>
+	<div class="container">
+		<p><b>INCOME</b></p>
+		<p>£<span id="net"></span> Net Annual income</p>
+		<p>£<span id="income_tax"></span> Income Tax</p>
+		<p>£<span id="national_insurance"></span> National Insurance</p>
+		<p>£<span id="student_loan"></span> Student Loan</p>
+		<p>£<span id="pension"></span> Pension</p>
+		<p>£<span id="monthly"></span> Net Monthly income</p>
+		<p><b>EXPENDITURE</b>
+		<p>£<span id="bill_share"></span> Monthly rent and bills</p>
+		<p>£<span id="repayment"></span> Debt repayment</p>
+		</br>
+		<p><b>£<span id="disposable"></span> Monthly disposable income</b></p>
+	</div>
+</body>
+</html>
+
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script type="text/javascript" src="tax.js"></script>
+
