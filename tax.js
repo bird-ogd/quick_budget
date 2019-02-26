@@ -1,9 +1,8 @@
 var decile = [];
 var final = [];
 
-function calculate(val) {
+function calculate(val, pension, student_loan) {
 
-	var student_loan = 0;
 	var stu = 0;
 	var loan_thres_1 = 18330;
 	var loan_thres_2 = 25000;
@@ -12,7 +11,6 @@ function calculate(val) {
 	var higher = 150000;
 	var zero_ni = 8424;
 	var basic_ni = 46384;
-	var pension = 0;
 	var personal_allowance_reduce_start = 100000;
 	var personal_allowance_reduce_end = 123700;
 
@@ -30,7 +28,6 @@ function calculate(val) {
 	var ni_add;
 	var additional_ni;
 
-	var student;
 	var pens;
 	var reduce;
 
@@ -77,29 +74,27 @@ function calculate(val) {
 		// Student Loan
 
 		if(student_loan == 1) {
-
 			if(val <= loan_thres_1) {
 				student = 0;
 			} else {
 				stuable = val - loan_thres_1;
-				stu = taxable * 0.09;
+				stu = stuable * 0.09;
 			}
 		}
 
 		if(student_loan == 2) {
-
 			if(val <= loan_thres_2) {
 				student = 0;
 			} else {
 				stuable = val - loan_thres_2;
-				stu = taxable * 0.09;
+				stu = stuable * 0.09;
 			}
 		}
 
 		// Pension
 
 		if (pension != 0) {
-			pens = val * pension;
+			pens = val * pension / 100;
 		} else {
 			pens = 0;
 		}
@@ -121,8 +116,10 @@ function calculate(val) {
 		final["gross_amount"] = val;
 		final["income_tax"] = income_tax;
 		final["national_insurance"] = national_insurance;
-		final["student_loan"] = stu;
-		final["pension"] = pens;
+		final["student_loan"] = student_loan;
+		final["student"] = stu;
+		final["pension"] = pension;
+		final["pens_total"] = pens;
 		final["net_amount"] = net;
 		final["monthly"] = net / 12;
 	}
@@ -193,14 +190,6 @@ function calculate(val) {
 		final["disposable"] = final["disposable"] - repayment;
 	}
 
-	function calculatePension(gross, pension) {
-		final["pension"] = pension;
-	}
-
-	function calculateStudent(gross, student) {
-		final["student_loan"] = student;
-	}
-
 	var result;
 
 	$(".slides").on("input", function() {
@@ -212,20 +201,20 @@ function calculate(val) {
 		var slider6 = parseInt($("#slider6").val());
 		var slider7 = parseInt($("#slider7").val());
 
-		calculate(slider1);
+		calculate(slider1, slider6, slider7);
 		calculateRent(slider2);
 		calculateSharers(slider3);
 		calculateAfford(final["monthly"], final["rent"], final["sharers"]);
 		calculateDebt(slider4, slider5);
-		calculatePension(slider1, slider6);
-		calculateStudent(slider1, slider7);
 
 		document.getElementById("gross").innerHTML = final["gross_amount"].toLocaleString();
 		document.getElementById("net").innerHTML = final["net_amount"].toLocaleString();
 		document.getElementById("income_tax").innerHTML = final["income_tax"].toLocaleString();
 		document.getElementById("national_insurance").innerHTML = final["national_insurance"].toLocaleString();
 		document.getElementById("student_loan").innerHTML = final["student_loan"].toLocaleString();
+		document.getElementById("student").innerHTML = final["student"].toLocaleString();
 		document.getElementById("pension").innerHTML = final["pension"].toLocaleString();
+		document.getElementById("pens_total").innerHTML = final["pens_total"].toLocaleString();
 		document.getElementById("monthly").innerHTML = final["monthly"].toLocaleString();
 		document.getElementById("rent").innerHTML = final["rent"].toLocaleString();
 		document.getElementById("sharers").innerHTML = final["sharers"].toLocaleString();
