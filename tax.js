@@ -173,10 +173,11 @@ function calculate(val, pension, student_loan) {
 
 		var bills = council_tax + internet + water + gas + electricity;
 
-		rent_share = rent + bills;
-		rent_share = rent_share / sharers;
-		final["final_result"] = rent_share;
-		disposable_income = net_income - rent_share;
+		rent_share = rent / sharers;
+		bill_share = bills / sharers;
+		final["rent_share"] = rent_share;
+		final["bill_share"] = bill_share;
+		disposable_income = net_income - rent_share - bill_share;
 		final["disposable"] = disposable_income;
 	}
 
@@ -218,7 +219,8 @@ function calculate(val, pension, student_loan) {
 		document.getElementById("monthly").innerHTML = final["monthly"].toLocaleString();
 		document.getElementById("rent").innerHTML = final["rent"].toLocaleString();
 		document.getElementById("sharers").innerHTML = final["sharers"].toLocaleString();
-		document.getElementById("bill_share").innerHTML = final["final_result"].toLocaleString();
+		document.getElementById("rent_share").innerHTML = final["rent_share"].toLocaleString();
+		document.getElementById("bill_share").innerHTML = final["bill_share"].toLocaleString();
 		document.getElementById("repayment").innerHTML = final["repayment"].toLocaleString();
 		document.getElementById("disposable").innerHTML = final["disposable"].toLocaleString();
 		document.getElementById("debt").innerHTML = final["debt"].toLocaleString();
