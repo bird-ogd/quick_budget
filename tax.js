@@ -1,5 +1,5 @@
 var decile = [];
-var final = [];
+var result = [];
 
 function calculate(val, pension, student_loan) {
 
@@ -109,27 +109,27 @@ function calculate(val, pension, student_loan) {
 			income_tax = income_tax + (personal_allowance * 0.4);
 		}
 
-		// Final calculation
+		// result calculation
 
 		var net = val - income_tax - national_insurance - stu - pens;
 
-		final["gross_amount"] = val;
-		final["income_tax"] = income_tax;
-		final["national_insurance"] = national_insurance;
-		final["student_loan"] = student_loan;
-		final["student"] = stu;
-		final["pension"] = pension;
-		final["pens_total"] = pens;
-		final["net_amount"] = net;
-		final["monthly"] = net / 12;
+		result["gross_amount"] = val;
+		result["income_tax"] = income_tax;
+		result["national_insurance"] = national_insurance;
+		result["student_loan"] = student_loan;
+		result["student"] = stu;
+		result["pension"] = pension;
+		result["pens_total"] = pens;
+		result["net_amount"] = net;
+		result["monthly"] = net / 12;
 	}
 
 	function calculateRent(val) {
-		final["rent"] = val;
+		result["rent"] = val;
 	}
 
 	function calculateSharers(val) {
-		final["sharers"] = val;
+		result["sharers"] = val;
 	}
 
 	function calculateAfford(net_income, rent, sharers) {
@@ -141,13 +141,13 @@ function calculate(val, pension, student_loan) {
 		var bills;
 
 		if(sharers == 1) {
-			council_tax = 67;
+			council_tax = 65;
 			water = 20;
 			electricity = 40;
 			gas = 30;
 		} 
 		else if(sharers == 2) {
-			council_tax = 102;
+			council_tax = 100;
 			water = 35;
 			electricity = 50;
 			gas = 40;
@@ -158,16 +158,16 @@ function calculate(val, pension, student_loan) {
 			electricity = 65;
 			gas = 55;
 		}
-		else if(sharers = 4) {
-			council_tax = 141;
+		else if(sharers == 4) {
+			council_tax = 140;
 			water = 55;
-			electricity = 75;
+			electricity = 80;
 			gas = 65;
 		}
-		else if(sharers = 5) {
-			council_tax = 167;
+		else if(sharers == 5) {
+			council_tax = 160;
 			water = 65;
-			electricity = 85;
+			electricity = 90;
 			gas = 75;
 		}
 
@@ -175,23 +175,21 @@ function calculate(val, pension, student_loan) {
 
 		rent_share = rent / sharers;
 		bill_share = bills / sharers;
-		final["rent_share"] = rent_share;
-		final["bill_share"] = bill_share;
+		result["rent_share"] = rent_share;
+		result["bill_share"] = bill_share;
 		disposable_income = net_income - rent_share - bill_share;
-		final["disposable"] = disposable_income;
+		result["disposable"] = disposable_income;
 	}
 
 	function calculateDebt(debt, apr) {
 		var repayment = debt / 100;
 		repayment = repayment * apr;
 		repayment = repayment / 12;
-		final["debt"] = debt;
-		final["interest"] = apr;
-		final["repayment"] = repayment;
-		final["disposable"] = final["disposable"] - repayment;
+		result["debt"] = debt;
+		result["interest"] = apr;
+		result["repayment"] = repayment;
+		result["disposable"] = result["disposable"] - repayment;
 	}
-
-	var result;
 
 	$(".slides").on("input", function() {
 		var slider1 = parseInt($("#slider1").val());
@@ -205,24 +203,24 @@ function calculate(val, pension, student_loan) {
 		calculate(slider1, slider6, slider7);
 		calculateRent(slider2);
 		calculateSharers(slider3);
-		calculateAfford(final["monthly"], final["rent"], final["sharers"]);
+		calculateAfford(result["monthly"], result["rent"], result["sharers"]);
 		calculateDebt(slider4, slider5);
 
-		document.getElementById("gross").innerHTML = final["gross_amount"].toLocaleString();
-		document.getElementById("net").innerHTML = final["net_amount"].toLocaleString();
-		document.getElementById("income_tax").innerHTML = final["income_tax"].toLocaleString();
-		document.getElementById("national_insurance").innerHTML = final["national_insurance"].toLocaleString();
-		document.getElementById("student_loan").innerHTML = final["student_loan"].toLocaleString();
-		document.getElementById("student").innerHTML = final["student"].toLocaleString();
-		document.getElementById("pension").innerHTML = final["pension"].toLocaleString();
-		document.getElementById("pens_total").innerHTML = final["pens_total"].toLocaleString();
-		document.getElementById("monthly").innerHTML = final["monthly"].toLocaleString();
-		document.getElementById("rent").innerHTML = final["rent"].toLocaleString();
-		document.getElementById("sharers").innerHTML = final["sharers"].toLocaleString();
-		document.getElementById("rent_share").innerHTML = final["rent_share"].toLocaleString();
-		document.getElementById("bill_share").innerHTML = final["bill_share"].toLocaleString();
-		document.getElementById("repayment").innerHTML = final["repayment"].toLocaleString();
-		document.getElementById("disposable").innerHTML = final["disposable"].toLocaleString();
-		document.getElementById("debt").innerHTML = final["debt"].toLocaleString();
-		document.getElementById("interest").innerHTML = final["interest"].toLocaleString();
+		document.getElementById("gross").innerHTML = result["gross_amount"].toLocaleString();
+		document.getElementById("net").innerHTML = result["net_amount"].toLocaleString();
+		document.getElementById("income_tax").innerHTML = result["income_tax"].toLocaleString();
+		document.getElementById("national_insurance").innerHTML = result["national_insurance"].toLocaleString();
+		document.getElementById("student_loan").innerHTML = result["student_loan"].toLocaleString();
+		document.getElementById("student").innerHTML = result["student"].toLocaleString();
+		document.getElementById("pension").innerHTML = result["pension"].toLocaleString();
+		document.getElementById("pens_total").innerHTML = result["pens_total"].toLocaleString();
+		document.getElementById("monthly").innerHTML = result["monthly"].toLocaleString();
+		document.getElementById("rent").innerHTML = result["rent"].toLocaleString();
+		document.getElementById("sharers").innerHTML = result["sharers"].toLocaleString();
+		document.getElementById("rent_share").innerHTML = result["rent_share"].toLocaleString();
+		document.getElementById("bill_share").innerHTML = result["bill_share"].toLocaleString();
+		document.getElementById("repayment").innerHTML = result["repayment"].toLocaleString();
+		document.getElementById("disposable").innerHTML = result["disposable"].toLocaleString();
+		document.getElementById("debt").innerHTML = result["debt"].toLocaleString();
+		document.getElementById("interest").innerHTML = result["interest"].toLocaleString();
 	});
