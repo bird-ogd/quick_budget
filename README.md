@@ -1,2 +1,2 @@
-# uk_tax_calculator
-Calculate income tax and national insurance on earnings
+# quick_budget
+Calculate disposable income after tax, housing costs, and interest on debts.
