@@ -68,7 +68,7 @@ function calculate(val, pension, student_loan) {
 	// Student Loan
 	if(student_loan == 1) {
 		if(val <= loan_thres_1) {
-		student = 0;
+			student = 0;
 		} else {
 			stuable = val - loan_thres_1;
 			stu = stuable * 0.09;
@@ -103,14 +103,14 @@ function calculate(val, pension, student_loan) {
 	// result calculation
 	var net = val - income_tax - national_insurance - stu - pens;
 
-	result["gross_amount"] = val;
+	result["gross"] = val;
 	result["income_tax"] = income_tax;
 	result["national_insurance"] = national_insurance;
 	result["student_loan"] = student_loan;
 	result["student"] = stu;
 	result["pension"] = pension;
 	result["pens_total"] = pens;
-	result["net_amount"] = net;
+	result["net"] = net;
 	result["monthly"] = net / 12;
 }
 
@@ -178,10 +178,10 @@ function calculateDebt(debt, apr) {
 	result["debt"] = debt;
 	result["interest"] = apr;
 	result["repayment"] = repayment;
-	result["disposable"] = result["disposable"] - repayment;
+	result["disposable"] -= repayment;
 }
 
-$(".slides").on("input", function() {
+function updateResults() {
 	var slider1 = parseInt($("#slider1").val());
 	var slider2 = parseInt($("#slider2").val());
 	var slider3 = parseInt($("#slider3").val());
@@ -189,6 +189,23 @@ $(".slides").on("input", function() {
 	var slider5 = parseInt($("#slider5").val());
 	var slider6 = parseInt($("#slider6").val());
 	var slider7 = parseInt($("#slider7").val());
+	var items = [	"gross", 
+					"net", 
+					"income_tax", 
+					"national_insurance", 
+					"student_loan",
+					"student",
+					"pension",
+					"pens_total",
+					"monthly",
+					"rent",
+					"sharers",
+					"rent_share",
+					"bill_share",
+					"repayment",
+					"disposable",
+					"debt",
+					"interest"];
 
 	calculate(slider1, slider6, slider7);
 	calculateRent(slider2);
@@ -196,21 +213,11 @@ $(".slides").on("input", function() {
 	calculateAfford(result["monthly"], result["rent"], result["sharers"]);
 	calculateDebt(slider4, slider5);
 
-	document.getElementById("gross").innerHTML = result["gross_amount"].toLocaleString();
-	document.getElementById("net").innerHTML = result["net_amount"].toLocaleString();
-	document.getElementById("income_tax").innerHTML = result["income_tax"].toLocaleString();
-	document.getElementById("national_insurance").innerHTML = result["national_insurance"].toLocaleString();
-	document.getElementById("student_loan").innerHTML = result["student_loan"].toLocaleString();
-	document.getElementById("student").innerHTML = result["student"].toLocaleString();
-	document.getElementById("pension").innerHTML = result["pension"].toLocaleString();
-	document.getElementById("pens_total").innerHTML = result["pens_total"].toLocaleString();
-	document.getElementById("monthly").innerHTML = result["monthly"].toLocaleString();
-	document.getElementById("rent").innerHTML = result["rent"].toLocaleString();
-	document.getElementById("sharers").innerHTML = result["sharers"].toLocaleString();
-	document.getElementById("rent_share").innerHTML = result["rent_share"].toLocaleString();
-	document.getElementById("bill_share").innerHTML = result["bill_share"].toLocaleString();
-	document.getElementById("repayment").innerHTML = result["repayment"].toLocaleString();
-	document.getElementById("disposable").innerHTML = result["disposable"].toLocaleString();
-	document.getElementById("debt").innerHTML = result["debt"].toLocaleString();
-	document.getElementById("interest").innerHTML = result["interest"].toLocaleString();
-});
+	for(var i = 0; i < items.length; i++) {
+		document.getElementById(items[i]).innerHTML = result[items[i]].toLocaleString();
+	}
+}
+
+$(".slides").on("input", updateResults);
+
+
