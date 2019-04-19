@@ -182,13 +182,13 @@ function calculateDebt(debt, apr) {
 }
 
 function updateResults() {
-	var slider1 = parseInt($("#slider1").val());
-	var slider2 = parseInt($("#slider2").val());
-	var slider3 = parseInt($("#slider3").val());
-	var slider4 = parseInt($("#slider4").val());
-	var slider5 = parseInt($("#slider5").val());
-	var slider6 = parseInt($("#slider6").val());
-	var slider7 = parseInt($("#slider7").val());
+	var slider1 = parseInt(document.querySelector("#slider1").value);
+	var slider2 = parseInt(document.querySelector("#slider2").value);
+	var slider3 = parseInt(document.querySelector("#slider3").value);
+	var slider4 = parseInt(document.querySelector("#slider4").value);
+	var slider5 = parseInt(document.querySelector("#slider5").value);
+	var slider6 = parseInt(document.querySelector("#slider6").value);
+	var slider7 = parseInt(document.querySelector("#slider7").value);
 	var items = [	"gross", 
 					"net", 
 					"income_tax", 
@@ -218,6 +218,7 @@ function updateResults() {
 	}
 }
 
-$(".slides").on("input", updateResults);
-
-
+var slides = document.querySelectorAll(".slides");
+for(i = 0; i < slides.length; i++) {
+	slides[i].addEventListener("input", updateResults);
+}
