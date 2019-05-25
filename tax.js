@@ -133,32 +133,32 @@ function calculateAfford(net_income, rent, sharers) {
 	if(sharers == 1) {
 		council_tax = 65;
 		water = 20;
-		electricity = 40;
-		gas = 30;
+		electricity = 35;
+		gas = 25;
 	} 
 	else if(sharers == 2) {
 		council_tax = 100;
 		water = 35;
-		electricity = 50;
-		gas = 40;
+		electricity = 45;
+		gas = 35;
 	}
 	else if(sharers == 3) {
 		council_tax = 115;
 		water = 45;
-		electricity = 65;
-		gas = 55;
+		electricity = 60;
+		gas = 50;
 	}
 	else if(sharers == 4) {
 		council_tax = 140;
 		water = 55;
-		electricity = 80;
-		gas = 65;
+		electricity = 75;
+		gas = 60;
 	}
 	else if(sharers == 5) {
 		council_tax = 160;
 		water = 65;
-		electricity = 90;
-		gas = 75;
+		electricity = 85;
+		gas = 70;
 	}
 
 	var bills = council_tax + internet + water + gas + electricity;
