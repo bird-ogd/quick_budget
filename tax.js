@@ -107,11 +107,11 @@ function calculate(val, pension, student_loan) {
 	result["income_tax"] = income_tax;
 	result["national_insurance"] = national_insurance;
 	result["student_loan"] = student_loan;
-	result["student"] = stu;
+	result["student"] = stu.toFixed(2);
 	result["pension"] = pension;
 	result["pens_total"] = pens;
 	result["net"] = net;
-	result["monthly"] = net / 12;
+	result["monthly"] = (net / 12).toFixed(2);
 }
 
 function calculateRent(val) {
@@ -143,19 +143,19 @@ function calculateAfford(net_income, rent, sharers) {
 		gas = 35;
 	}
 	else if(sharers == 3) {
-		council_tax = 115;
+		council_tax = 125;
 		water = 45;
 		electricity = 60;
 		gas = 50;
 	}
 	else if(sharers == 4) {
-		council_tax = 140;
+		council_tax = 150;
 		water = 55;
 		electricity = 75;
 		gas = 60;
 	}
 	else if(sharers == 5) {
-		council_tax = 160;
+		council_tax = 170;
 		water = 65;
 		electricity = 85;
 		gas = 70;
@@ -165,10 +165,10 @@ function calculateAfford(net_income, rent, sharers) {
 
 	rent_share = rent / sharers;
 	bill_share = bills / sharers;
-	result["rent_share"] = rent_share;
-	result["bill_share"] = bill_share;
+	result["rent_share"] = rent_share.toFixed(2);
+	result["bill_share"] = bill_share.toFixed(2);
 	disposable_income = net_income - rent_share - bill_share;
-	result["disposable"] = disposable_income;
+	result["disposable"] = disposable_income.toFixed(2);
 }
 
 function calculateDebt(debt, apr) {
@@ -177,8 +177,8 @@ function calculateDebt(debt, apr) {
 	repayment = repayment / 12;
 	result["debt"] = debt;
 	result["interest"] = apr;
-	result["repayment"] = repayment;
-	result["disposable"] -= repayment;
+	result["repayment"] = repayment.toFixed(2);
+	result["disposable"] -= repayment.toFixed(2);
 }
 
 function updateResults() {

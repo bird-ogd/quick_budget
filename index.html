@@ -2,9 +2,13 @@
 <html>
 <head>
 	<title>Quick Budget</title>
+	<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<h1>Quick Budget</h1>
+<div class="content">
 	<div class="container">
 		<div class="slidecontainer">
 			<h3>Salary (£<span id="gross"></span>pa)</h3>
@@ -36,20 +40,52 @@
 		</div>
 	</div>
 	<div class="container">
-		<p><b>INCOME</b></p>
-		<p>£<span id="net"></span> Net Income (pa)</p>
-		<p>£<span id="income_tax"></span> Income Tax (pa)</p>
-		<p>£<span id="national_insurance"></span> National Insurance (pa)</p>
-		<p>£<span id="student"></span> Student Loan (pa)</p>
-		<p>£<span id="pens_total"></span> Pension (pa)</p>
-		<p>£<span id="monthly"></span> Net Income (pcm)</p>
-		<p><b>EXPENDITURE</b>
-		<p>£<span id="rent_share"></span> Share of rent (pcm)</p>
-		<p>£<span id="bill_share"></span> Estimated share of bills (pcm)</p>
-		<p>£<span id="repayment"></span> Debt repayment (pcm)</p>
-		</br>
-		<p><b>£<span id="disposable"></span> Monthly disposable income</b></p>
+		<table>
+			<tbody>
+				<tr>
+					<td>Net Income (pa)</td>
+					<td>£<span id="net"></span></span></td>
+				</tr>
+				<tr>
+					<td>Income Tax (pa)</td>
+					<td>£<span id="income_tax"></span></td>
+				</tr>
+				<tr>
+					<td>National Insurance (pa)</td>
+					<td>£<span id="national_insurance"></span></td>
+				</tr>
+				<tr>
+					<td>Student Loan (pa)</td>
+					<td>£<span id="student"></span></td>
+				</tr>
+				<tr>
+					<td>Pension (pa)</td>
+					<td>£<span id="pens_total"></span></td>
+				</tr>
+				<tr>
+					<td>Net Income (pcm)</td>
+					<td>£<span id="monthly"></span></td>
+				</tr>
+				<tr>
+					<td>Share of rent (pcm)</td>
+					<td>£<span id="rent_share"></span></td>
+				</tr>
+				<tr>
+					<td>Estimated share of bills (pcm)</td>
+					<td>£<span id="bill_share"></span></td>
+				</tr>
+				<tr>
+					<td>Interest on debts (pcm)</td>
+					<td>£<span id="repayment"></span></td>
+				</tr>
+				<tr>
+					<td>Monthly disposable income</td>
+					<td>£<span id="disposable"></span></td>
+				</tr>				
+			</tbody>
+		</table>
 	</div>
+</div>
 </body>
 </html>
 
